@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+}
+
+.container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 10px;
+    width: 100vw;
+}
+
+.container .mapCont {
+    box-sizing: border-box;
+    height: 100%;
+    background-color: white;
+    position: relative;
+}
+
+.container .mapCont #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.container .optionsCont {
+    box-sizing: border-box;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container .optionsCont .form {
+    margin: 0 10px;
+}

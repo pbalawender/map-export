@@ -1,0 +1,38 @@
+{
+  "name": "map-export",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pbalawender/map-export.git"
+  },
+  "author": "pbalawender",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pbalawender/map-export/issues"
+  },
+  "homepage": "https://github.com/pbalawender/map-export#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-beta.3",
+    "babel-loader": "^8.0.2",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^1.0.0",
+    "dotenv-webpack": "^1.5.7",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.0-rc.1",
+    "ol": "^5.2.0"
+  }
+}
