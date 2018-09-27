@@ -1,5 +1,7 @@
 import saveAs from 'file-saver';
 import { primaryColor } from './colors';
+import { drawMarker } from './marker';
+
 const dims = {
     a0: [1189, 841],
     a1: [841, 594],
@@ -32,14 +34,16 @@ export const exportMap = (map, options, callback) => {
         //apply the old canvas to the new one
         context.drawImage(canvas, 0, 0);
 
-        // context.globalCompositeOperation='destination-over';
-
+        map.getOverlays().forEach((overlay) => {
+            const position = overlay.getPosition();
+            const pixel = map.getPixelFromCoordinate(position);
+            drawMarker(newCanvas, pixel.map((p) => p + 11));
+        });
 
         newCanvas.toBlob(result => saveAs(result, 'Gdansk.png'));
         map.setSize(size);
         map.getView().fit(extent, {size: size});
         callback();
-
 
     });
 

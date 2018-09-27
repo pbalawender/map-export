@@ -36,3 +36,8 @@ body {
 .container .optionsCont .form {
     margin: 0 10px;
 }
+
+.circle {
+    /*width: 10px;*/
+    /*height: 10px;*/
+}
