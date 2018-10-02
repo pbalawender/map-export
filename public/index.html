@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Prosto+One" rel="stylesheet">
     <title>Map Export</title>
 </head>
 <body>
@@ -14,10 +15,10 @@
                 <label for="format">Page size </label>
                 <select id="format">
                     <option value="a0">A0 (slow)</option>
-                    <option value="a1" selected>A1</option>
+                    <option value="a1">A1</option>
                     <option value="a2">A2</option>
                     <option value="a3">A3</option>
-                    <option value="a4">A4</option>
+                    <option value="a4" selected>A4</option>
                     <option value="a5">A5 (fast)</option>
                 </select>
                 <label for="resolution">Resolution </label>
@@ -26,6 +27,11 @@
                     <option value="150" selected>150 dpi</option>
                     <option value="300">300 dpi (slow)</option>
                 </select>
+                <label for="margin">Margin </label>
+                <input type="number" id="margin" placeholder="[cm]"/>
+                <label for="title">Title </label>
+                <input type="text" id="title" placeholder=""/>
+
             </form>
             <button id="export">Export</button>
         </div>

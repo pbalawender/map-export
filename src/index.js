@@ -75,7 +75,11 @@ exportButton.addEventListener('click', () => {
     document.body.style.cursor = 'progress';
     const format = document.getElementById('format').value;
     const resolution = document.getElementById('resolution').value;
-    exportMap(map, {format, resolution}, () => {
+    const marginRaw = parseFloat(document.getElementById('margin').value);
+    const margin = isNaN(marginRaw)? 0: marginRaw;
+    const title = document.getElementById('title').value.trim();
+
+    exportMap(map, {format, resolution, margin, title}, () => {
         exportButton.disabled = false;
         document.body.style.cursor = 'auto';
     });

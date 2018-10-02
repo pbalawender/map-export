@@ -1,5 +1,5 @@
 import saveAs from 'file-saver';
-import { primaryColor } from './colors';
+import { primaryColor, secondaryColor } from './colors';
 import { drawMarker } from './marker';
 
 const dims = {
@@ -12,7 +12,7 @@ const dims = {
 };
 
 export const exportMap = (map, options, callback) => {
-    const { format, resolution } = options;
+    const { format, resolution, margin, title } = options;
     const dim = dims[format];
     const width = Math.round(dim[0] * resolution / 25.4);
     const height = Math.round(dim[1] * resolution / 25.4);
@@ -39,6 +39,27 @@ export const exportMap = (map, options, callback) => {
             const pixel = map.getPixelFromCoordinate(position);
             drawMarker(newCanvas, pixel.map((p) => p + 11));
         });
+
+        if (margin) {
+            const marginInPixels = Math.round(10 * margin * resolution / 25.4);
+            console.log(`Canvas: ${newCanvas.width} x ${newCanvas.height}, Margin: ${marginInPixels}`);
+            context.fillStyle = primaryColor;
+            context.fillRect(0, 0, marginInPixels, newCanvas.height);
+            context.fillRect(0, 0, newCanvas.width, marginInPixels);
+            context.fillRect(newCanvas.width - marginInPixels, 0, marginInPixels, newCanvas.height);
+            context.fillRect(0, newCanvas.height - marginInPixels, newCanvas.width, marginInPixels);
+        }
+
+        if (title) {
+            const titleHeight = Math.round(newCanvas.height * 0.1);
+            context.fillStyle = primaryColor;
+            context.fillRect(0, newCanvas.height - titleHeight, newCanvas.width, titleHeight);
+            context.font = `${Math.round(titleHeight / 2)}px 'Prosto One'`;
+            context.fillStyle = secondaryColor;
+            context.textAlign = "center";
+            context.textBaseline="middle";
+            context.fillText(title, newCanvas.width / 2, newCanvas.height - Math.round(titleHeight * 0.5));
+        }
 
         newCanvas.toBlob(result => saveAs(result, 'Gdansk.png'));
         map.setSize(size);
