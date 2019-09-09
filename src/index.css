@@ -1,3 +1,6 @@
+* {
+    font-family: 'Prosto One', serif;
+}
 body {
     margin: 0;
 }
@@ -35,4 +38,13 @@ body {
 }
 .container .optionsCont .form {
     margin: 0 10px;
+}
+
+.container .optionsCont .form #margin{
+    width: 60px;
+}
+
+.circle {
+    /*width: 10px;*/
+    /*height: 10px;*/
 }

@@ -1,13 +1,14 @@
 import './index.css';
 import 'ol/ol.css';
 
-import { Map, View } from 'ol';
+import { Map, Overlay, View } from 'ol';
 import VectorTileLayer from 'ol/layer/VectorTile';
 import VectorTileSource from 'ol/source/VectorTile';
 import { MVT } from 'ol/format';
 import { landuseStyle, roadStyle, waterStyle } from './styles';
 import { exportMap } from './export';
 import { primaryColor } from './colors';
+import { drawMarker } from './marker';
 
 
 document.getElementById('map').style.backgroundColor = primaryColor;
@@ -46,6 +47,27 @@ const map = new Map({
     })
 });
 
+const overlayId = 'marker';
+const marker = document.createElement('canvas');
+marker.height = 22;
+marker.width = 22;
+marker.style.marginTop = '-11px';
+marker.style.marginLeft = '-11px';
+drawMarker(marker, [marker.width / 2, marker.height / 2 ]);
+
+map.on('click', function(event) {
+    const { coordinate } = event;
+    const oldOverlay = map.getOverlayById(overlayId);
+    if (oldOverlay) {
+        map.removeOverlay(oldOverlay);
+    }
+    map.addOverlay(new Overlay({
+        id: overlayId,
+        position: coordinate,
+        element: marker,
+    }));
+}, false);
+
 const exportButton = document.getElementById('export');
 
 exportButton.addEventListener('click', () => {
@@ -53,7 +75,11 @@ exportButton.addEventListener('click', () => {
     document.body.style.cursor = 'progress';
     const format = document.getElementById('format').value;
     const resolution = document.getElementById('resolution').value;
-    exportMap(map, {format, resolution}, () => {
+    const marginRaw = parseFloat(document.getElementById('margin').value);
+    const margin = isNaN(marginRaw)? 0: marginRaw;
+    const title = document.getElementById('title').value.trim();
+
+    exportMap(map, {format, resolution, margin, title}, () => {
         exportButton.disabled = false;
         document.body.style.cursor = 'auto';
     });
